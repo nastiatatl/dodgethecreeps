@@ -3,6 +3,7 @@ extends Node
 @export var mob_scene: PackedScene
 @export var coin_scene: PackedScene
 var score
+var num_coins
 
 
 # Called when the node enters the scene tree for the first time.
@@ -27,16 +28,18 @@ func game_over() -> void:
 	
 func coin_collected() -> void:
 	$CoinSound.play()
-	score += 5
-	$HUD.update_score(score)
+	num_coins += 1
+	$HUD.update_num_coins(num_coins)
 	
 func new_game():
 	score = 0
+	num_coins = 0
 	$Music.play()
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	
 	$HUD.update_score(score)
+	$HUD.update_num_coins(num_coins)
 	$HUD.show_message("Get Ready")
 	
 

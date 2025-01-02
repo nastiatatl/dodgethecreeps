@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3jm3kl5tuidx"]
+[gd_scene load_steps=4 format=3 uid="uid://c3jm3kl5tuidx"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_ttb0v"]
 [ext_resource type="FontFile" uid="uid://de6pegnsywt8c" path="res://assets/fonts/Xolonium-Regular.ttf" id="2_56jjw"]
+[ext_resource type="Texture2D" uid="uid://hekboy21yp1h" path="res://assets/images/coin.png" id="3_gqodx"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_ttb0v")
@@ -19,6 +20,23 @@ theme_override_font_sizes/font_size = 64
 text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 366.0
+offset_top = 17.0
+offset_right = 430.0
+offset_bottom = 81.0
+scale = Vector2(0.572886, 0.572886)
+texture = ExtResource("3_gqodx")
+
+[node name="CoinLabel" type="Label" parent="."]
+offset_left = 406.0
+offset_top = 18.0
+offset_right = 471.0
+offset_bottom = 57.0
+theme_override_fonts/font = ExtResource("2_56jjw")
+theme_override_font_sizes/font_size = 32
+text = "x0"
 
 [node name="Message" type="Label" parent="."]
 anchors_preset = 14
