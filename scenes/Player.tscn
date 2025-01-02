@@ -1,19 +1,19 @@
 [gd_scene load_steps=8 format=3 uid="uid://cutstqsl5std2"]
 
-[ext_resource type="Texture2D" uid="uid://bqfwkknxb2tv3" path="res://art/playerGrey_walk1.png" id="1_5vmsi"]
-[ext_resource type="Script" path="res://player.gd" id="1_qu8f5"]
-[ext_resource type="Texture2D" uid="uid://cfh5vq8jl5iea" path="res://art/playerGrey_up1.png" id="2_dmur2"]
-[ext_resource type="Texture2D" uid="uid://bmbwg7opggy3k" path="res://art/playerGrey_walk2.png" id="2_hegqu"]
-[ext_resource type="Texture2D" uid="uid://cym517rl3bquc" path="res://art/playerGrey_up2.png" id="3_8vgfb"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_a65tb"]
+[ext_resource type="Texture2D" uid="uid://dildb123yglku" path="res://assets/images/playerGrey_up1.png" id="2_u1vlx"]
+[ext_resource type="Texture2D" uid="uid://b6y66qb6m1045" path="res://assets/images/playerGrey_up2.png" id="3_qjfbq"]
+[ext_resource type="Texture2D" uid="uid://nvk0qd7lugwc" path="res://assets/images/playerGrey_walk1.png" id="4_4ednm"]
+[ext_resource type="Texture2D" uid="uid://bu6555oj4sp2d" path="res://assets/images/playerGrey_walk2.png" id="5_glt5p"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8h8ad"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_dmur2")
+"texture": ExtResource("2_u1vlx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_8vgfb")
+"texture": ExtResource("3_qjfbq")
 }],
 "loop": true,
 "name": &"up",
@@ -21,10 +21,10 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_5vmsi")
+"texture": ExtResource("4_4ednm")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_hegqu")
+"texture": ExtResource("5_glt5p")
 }],
 "loop": true,
 "name": &"walk",
@@ -37,13 +37,13 @@ height = 54.7438
 
 [node name="Player" type="Area2D"]
 collision_mask = 3
-script = ExtResource("1_qu8f5")
+script = ExtResource("1_a65tb")
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_8h8ad")
-animation = &"up"
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(-1.15914, 1.27868)

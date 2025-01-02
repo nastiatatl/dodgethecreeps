@@ -1,12 +1,12 @@
 [gd_scene load_steps=11 format=4 uid="uid://cpr6cb7v5lcxc"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_3oyml"]
-[ext_resource type="PackedScene" uid="uid://cutstqsl5std2" path="res://Player.tscn" id="1_kgsuw"]
-[ext_resource type="PackedScene" uid="uid://cltiruuewng1e" path="res://Mob.tscn" id="2_dsdb4"]
-[ext_resource type="PackedScene" uid="uid://bj0cmf32hwduw" path="res://Coin.tscn" id="3_5dk6s"]
-[ext_resource type="PackedScene" uid="uid://c3jm3kl5tuidx" path="res://HUD.tscn" id="4_sq0r8"]
-[ext_resource type="AudioStream" uid="uid://ctnwcljejvp0q" path="res://art/gameover.wav" id="5_p6hgn"]
-[ext_resource type="AudioStream" uid="uid://bft1ivohddvgo" path="res://art/coin.mp3" id="7_y31ke"]
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_7fxv4"]
+[ext_resource type="PackedScene" uid="uid://cutstqsl5std2" path="res://scenes/Player.tscn" id="1_kgsuw"]
+[ext_resource type="PackedScene" uid="uid://cltiruuewng1e" path="res://scenes/Mob.tscn" id="2_dsdb4"]
+[ext_resource type="PackedScene" uid="uid://bj0cmf32hwduw" path="res://scenes/Coin.tscn" id="3_5dk6s"]
+[ext_resource type="AudioStream" uid="uid://bp1ysq5ehkg8c" path="res://assets/sounds/gameover.wav" id="4_guj0s"]
+[ext_resource type="PackedScene" uid="uid://c3jm3kl5tuidx" path="res://scenes/HUD.tscn" id="4_sq0r8"]
+[ext_resource type="AudioStream" uid="uid://7ky1skj7rk4" path="res://assets/sounds/coin.mp3" id="5_lj11j"]
 
 [sub_resource type="Curve2D" id="Curve2D_qhx1k"]
 _data = {
@@ -24,7 +24,7 @@ packet_sequence = SubResource("OggPacketSequence_lc10f")
 loop = true
 
 [node name="Main" type="Node"]
-script = ExtResource("1_3oyml")
+script = ExtResource("1_7fxv4")
 mob_scene = ExtResource("2_dsdb4")
 coin_scene = ExtResource("3_5dk6s")
 
@@ -39,7 +39,6 @@ color = Color(0.954531, 0.655499, 0.765583, 1)
 [node name="Player" parent="." instance=ExtResource("1_kgsuw")]
 
 [node name="MobTimer" type="Timer" parent="."]
-wait_time = 0.5
 
 [node name="ScoreTimer" type="Timer" parent="."]
 
@@ -64,10 +63,10 @@ curve = SubResource("Curve2D_qhx1k")
 stream = SubResource("AudioStreamOggVorbis_xx8l1")
 
 [node name="DeathSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("5_p6hgn")
+stream = ExtResource("4_guj0s")
 
 [node name="CoinSound" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_y31ke")
+stream = ExtResource("5_lj11j")
 
 [connection signal="coin_collected" from="Player" to="." method="coin_collected"]
 [connection signal="hit" from="Player" to="." method="game_over"]
