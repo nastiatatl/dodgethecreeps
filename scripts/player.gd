@@ -1,6 +1,6 @@
 extends Area2D
 signal hit
-signal coin_collected
+signal coin_collected(big_coin: bool)
 
 @export var speed = 400
 var screen_size
@@ -46,7 +46,7 @@ func _on_body_entered(body: Node2D) -> void:
 	$CollisionShape2D.set_deferred("disabled", true)
 		
 func _on_area_entered(area: Area2D) -> void:
-	coin_collected.emit()
+	coin_collected.emit(area.big_coin)
 	area.queue_free()
 	
 func start(pos):

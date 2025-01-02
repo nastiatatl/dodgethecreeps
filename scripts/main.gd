@@ -26,9 +26,12 @@ func game_over() -> void:
 	
 	$HUD.show_game_over()
 	
-func coin_collected() -> void:
+func coin_collected(big_coin: bool) -> void:
 	$CoinSound.play()
-	num_coins += 1
+	if big_coin:
+		num_coins += 5
+	else:
+		num_coins += 1
 	$HUD.update_num_coins(num_coins)
 	
 func new_game():
@@ -73,6 +76,10 @@ func _on_start_timer_timeout() -> void:
 
 func _on_coin_timer_timeout() -> void:
 	var coin = coin_scene.instantiate()
+	
+	# 10% chance to spawn a big coin
+	if randf() <= 0.1:
+		coin.big_coin = true
 	
 	var screen_size = get_viewport().get_visible_rect().size
 	var buffer = 50  # Distance from the edges

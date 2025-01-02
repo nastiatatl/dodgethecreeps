@@ -6,7 +6,7 @@ This project started as a follow-up to the official Godot "Your First 2D Game" t
 
 All features listed below were not part of the original tutorial linked above:
 
-1. **Coin spawning**: player can collect coins that spawn randomly every 3 seconds.
+1. **Coin spawning**: player can collect coins that spawn randomly every 3 seconds. Special **big coins** have a 10% chance to spawn instead of normal coins. Big coins are worth 5 regular coins but disappear after 5 seconds.
 2. **Coin counter**: keeps count of how many coins were collected by player.
 
 ## License
