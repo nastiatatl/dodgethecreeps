@@ -79,7 +79,7 @@ func _on_coin_timer_timeout() -> void:
 	var coin = coin_scene.instantiate()
 	
 	# 10% chance to spawn a big coin
-	if randf() <= 0.1:
+	if randf() <= 0.9:
 		coin.big_coin = true
 	
 	var screen_size = get_viewport().get_visible_rect().size

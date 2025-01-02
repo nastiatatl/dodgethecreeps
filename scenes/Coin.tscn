@@ -26,5 +26,10 @@ shape = SubResource("CircleShape2D_xmgwn")
 wait_time = 5.0
 one_shot = true
 
+[node name="FlashTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="timeout" from="BigCoinTimer" to="." method="_on_big_coin_timer_timeout"]
+[connection signal="timeout" from="FlashTimer" to="." method="_on_flash_timer_timeout"]
