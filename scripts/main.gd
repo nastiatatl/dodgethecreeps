@@ -4,6 +4,7 @@ extends Node
 @export var coin_scene: PackedScene
 var score
 var num_coins
+const MIN_COIN_DISTANCE = 50.0  # Minimum distance between coins
 
 
 # Called when the node enters the scene tree for the first time.
@@ -83,10 +84,20 @@ func _on_coin_timer_timeout() -> void:
 	
 	var screen_size = get_viewport().get_visible_rect().size
 	var buffer = 50  # Distance from the edges
+	var attempts = 10
+	var position_ok = false
 	
-	var random_x = randf_range(buffer, screen_size.x - buffer)
-	var random_y = randf_range(buffer, screen_size.y - buffer)
-	coin.position = Vector2(random_x, random_y)
+	while not position_ok and attempts > 0:
+		var random_x = randf_range(buffer, screen_size.x - buffer)
+		var random_y = randf_range(buffer, screen_size.y - buffer)
+		coin.position = Vector2(random_x, random_y)
+		
+		# Check distance to existing coins
+		position_ok = true
+		for other_coin in get_tree().get_nodes_in_group("coins"):
+			if coin.position.distance_to(other_coin.position) < MIN_COIN_DISTANCE:
+				position_ok = false
+				break
 	
 	add_child(coin)
 	
