@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bj0cmf32hwduw"]
+
+[ext_resource type="Script" path="res://coin.gd" id="1_85xge"]
+[ext_resource type="Texture2D" uid="uid://jm6sjwnb515k" path="res://art/coin.png" id="1_jc5q4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xmgwn"]
+
+[node name="Coin" type="Area2D" groups=["coins"]]
+scale = Vector2(0.529296, 0.481085)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("1_85xge")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.0332106, 0.0332106)
+texture = ExtResource("1_jc5q4")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(-3.05746, -3.05746)
+shape = SubResource("CircleShape2D_xmgwn")
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
