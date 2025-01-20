@@ -37,6 +37,9 @@ func update_score(score):
 	
 func update_num_coins(num_coins):
 	$CoinLabel.text = "x" + str(num_coins)
+	
+func update_num_hearts(num_hearts):
+	$HeartLabel.text = "x" + str(num_hearts)
 
 func _on_start_button_pressed() -> void:
 	$StartButton.hide()

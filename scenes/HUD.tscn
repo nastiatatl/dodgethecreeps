@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3jm3kl5tuidx"]
+[gd_scene load_steps=5 format=3 uid="uid://c3jm3kl5tuidx"]
 
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_ttb0v"]
 [ext_resource type="FontFile" uid="uid://de6pegnsywt8c" path="res://assets/fonts/Xolonium-Regular.ttf" id="2_56jjw"]
 [ext_resource type="Texture2D" uid="uid://hekboy21yp1h" path="res://assets/images/coin.png" id="3_gqodx"]
+[ext_resource type="Texture2D" uid="uid://bbigypqo17ikx" path="res://assets/images/heart.png" id="4_3t2dq"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_ttb0v")
@@ -21,7 +22,7 @@ text = "0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="CoinSymbol" type="TextureRect" parent="."]
 offset_left = 366.0
 offset_top = 17.0
 offset_right = 430.0
@@ -74,6 +75,23 @@ text = "Start"
 [node name="MessageTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="HeartSymbol" type="TextureRect" parent="."]
+offset_left = 20.0
+offset_top = 17.0
+offset_right = 60.0
+offset_bottom = 57.0
+size_flags_horizontal = 0
+texture = ExtResource("4_3t2dq")
+
+[node name="HeartLabel" type="Label" parent="."]
+offset_left = 63.0
+offset_top = 18.0
+offset_right = 128.0
+offset_bottom = 57.0
+theme_override_fonts/font = ExtResource("2_56jjw")
+theme_override_font_sizes/font_size = 32
+text = "x0"
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
 [connection signal="timeout" from="MessageTimer" to="." method="_on_message_timer_timeout"]

@@ -1,9 +1,13 @@
 extends Area2D
 signal hit
 signal coin_collected(big_coin: bool)
+signal special_item_collected
 
 @export var speed = 400
+@export var invincibility_duration: float = 2.0
+@export var flash_interval: float = 0.2 
 var screen_size
+var is_invincible = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -40,16 +44,40 @@ func _process(delta: float) -> void:
 		$AnimatedSprite2D.animation = "up"
 		$AnimatedSprite2D.flip_v = velocity.y > 0
 
-func _on_body_entered(body: Node2D) -> void:
-	hide()
+func _on_body_entered(body: RigidBody2D) -> void:
+	if is_invincible:
+		return
 	hit.emit()
 	$CollisionShape2D.set_deferred("disabled", true)
 		
 func _on_area_entered(area: Area2D) -> void:
-	coin_collected.emit(area.big_coin)
+	if area.is_in_group("coins"):
+		coin_collected.emit(area.big_coin)
+	else:
+		special_item_collected.emit(area)
 	area.queue_free()
 	
 func start(pos):
 	position = pos
 	show()
 	$CollisionShape2D.disabled = false
+
+func become_invincible() -> void:
+	hide()
+	is_invincible = true
+	flash(invincibility_duration)
+	await get_tree().create_timer(invincibility_duration).timeout
+	
+	is_invincible = false
+	#$CollisionShape2D.set_deferred("disabled", false)
+	$CollisionShape2D.disabled = false
+	show()
+	
+func flash(duration: float) -> void:
+	var flashes = int(duration / flash_interval)
+	var visible = false
+	for i in range(flashes):
+		await get_tree().create_timer(flash_interval).timeout
+		visible = !visible
+		show() if visible else hide()
+	show()
