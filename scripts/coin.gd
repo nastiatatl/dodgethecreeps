@@ -1,7 +1,6 @@
 extends Area2D
 
 @export var big_coin: bool = false
-@onready var big_coin_timer = $BigCoinTimer
 @export var flash_interval: float = 0.1  # Interval for flashing (in seconds)
 @export var big_coin_scale: Vector2 = Vector2(1.1, 1.1)  # Scale for big coins
 
@@ -11,7 +10,7 @@ func _ready() -> void:
 		$Sprite2D.texture = preload("res://assets/images/bigCoin.png")
 		scale_big_coin()
 		$FlashTimer.start()
-		big_coin_timer.start()
+		$BigCoinTimer.start()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

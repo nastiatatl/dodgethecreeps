@@ -10,6 +10,7 @@ All features listed below were not part of the original tutorial linked above:
 2. **Coin counter**: keeps count of how many coins were collected by player.
 3. **Special items**: spawn every five seconds, see below for specific items:
    1. **Heart**: gives the player a spare life. Once the player hits a mob, the lives counter goes down, and the player becomes invincible for 2 secons, losing the ability to collect coins and items.
+   2. **Shield**: the player gains protection from the mobs for 5 seconds.
 
 ## License
 This project is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License. You are free to use, modify, and share the project for non-commercial purposes only. Commercial use is prohibited.

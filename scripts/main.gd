@@ -9,7 +9,7 @@ var num_coins
 var num_hearts
 const MIN_DISTANCE = 75.0  # Minimum distance between items
 
-var all_groups = ["coins", "special_items", "hearts", "mobs"]  # List of all relevant groups
+var all_groups = ["coins", "special_items", "hearts", "shields", "mobs"]  # List of all relevant groups
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -39,6 +39,7 @@ func game_over() -> void:
 	
 	get_tree().call_group("mobs", "queue_free")
 	get_tree().call_group("coins", "queue_free")
+	get_tree().call_group("shields", "queue_free")
 	get_tree().call_group("special_items", "queue_free")
 	
 	$HUD.show_game_over()
@@ -110,6 +111,8 @@ func _on_special_item_timer_timeout() -> void:
 	
 	if random_special_item.name == "Heart":
 		random_special_item.add_to_group("hearts")
+	elif random_special_item.name == "Shield":
+		random_special_item.add_to_group("shields")
 	else:
 		random_special_item.add_to_group("special_items")
 		
@@ -147,7 +150,7 @@ func add_item(item: Node, group_name: String) -> void:
 	
 
 func special_item_collected(item: Area2D) -> void:
+	$SpecialItemSound.play()
 	if item.is_in_group("hearts"):
-		$SpecialItemSound.play()
 		num_hearts += 1
 		$HUD.update_num_hearts(num_hearts)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://cutstqsl5std2"]
+[gd_scene load_steps=9 format=3 uid="uid://cutstqsl5std2"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_a65tb"]
 [ext_resource type="Texture2D" uid="uid://dildb123yglku" path="res://assets/images/playerGrey_up1.png" id="2_u1vlx"]
 [ext_resource type="Texture2D" uid="uid://b6y66qb6m1045" path="res://assets/images/playerGrey_up2.png" id="3_qjfbq"]
 [ext_resource type="Texture2D" uid="uid://nvk0qd7lugwc" path="res://assets/images/playerGrey_walk1.png" id="4_4ednm"]
 [ext_resource type="Texture2D" uid="uid://bu6555oj4sp2d" path="res://assets/images/playerGrey_walk2.png" id="5_glt5p"]
+[ext_resource type="Texture2D" uid="uid://c6rsp6m7wq5ky" path="res://assets/images/protectionBubble.png" id="6_cgeg1"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8h8ad"]
 animations = [{
@@ -49,5 +50,19 @@ animation = &"walk"
 scale = Vector2(-1.15914, 1.27868)
 shape = SubResource("CapsuleShape2D_jcfrp")
 
+[node name="ProtectionBubble" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.665685, 0.697527)
+texture = ExtResource("6_cgeg1")
+
+[node name="ProtectionBubbleTimer" type="Timer" parent="ProtectionBubble"]
+wait_time = 5.0
+one_shot = true
+
+[node name="FlashTimer" type="Timer" parent="ProtectionBubble"]
+wait_time = 2.0
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="ProtectionBubble/ProtectionBubbleTimer" to="." method="_on_protection_bubble_timer_timeout"]
+[connection signal="timeout" from="ProtectionBubble/FlashTimer" to="." method="_on_flash_timer_timeout"]

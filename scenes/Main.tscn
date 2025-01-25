@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://cpr6cb7v5lcxc"]
+[gd_scene load_steps=15 format=4 uid="uid://cpr6cb7v5lcxc"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_7fxv4"]
 [ext_resource type="PackedScene" uid="uid://cutstqsl5std2" path="res://scenes/Player.tscn" id="1_kgsuw"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://bp1ysq5ehkg8c" path="res://assets/sounds/gameover.wav" id="4_guj0s"]
 [ext_resource type="PackedScene" uid="uid://c3jm3kl5tuidx" path="res://scenes/HUD.tscn" id="4_sq0r8"]
 [ext_resource type="AudioStream" uid="uid://7ky1skj7rk4" path="res://assets/sounds/coin.mp3" id="5_lj11j"]
+[ext_resource type="PackedScene" uid="uid://ce1k6iqp81dg" path="res://scenes/Shield.tscn" id="5_ongk4"]
 [ext_resource type="AudioStream" uid="uid://bwbp4n6i04d5l" path="res://assets/sounds/special_item.mp3" id="9_mr33u"]
 [ext_resource type="AudioStream" uid="uid://ch57pfnvg72gp" path="res://assets/sounds/mob_hit.mp3" id="10_15pgu"]
 
@@ -30,7 +31,7 @@ loop = true
 script = ExtResource("1_7fxv4")
 mob_scene = ExtResource("2_dsdb4")
 coin_scene = ExtResource("3_5dk6s")
-special_item_scenes = Array[PackedScene]([ExtResource("3_me62j")])
+special_item_scenes = Array[PackedScene]([ExtResource("3_me62j"), ExtResource("5_ongk4")])
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -51,7 +52,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="SpecialItemTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 8.0
 
 [node name="CoinTimer" type="Timer" parent="."]
 wait_time = 3.0

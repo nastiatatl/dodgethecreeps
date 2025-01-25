@@ -8,6 +8,8 @@ signal special_item_collected
 @export var flash_interval: float = 0.2 
 var screen_size
 var is_invincible = false
+var shield_duration: float = 5.0
+var shield_flash_delay: float = 2.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -53,6 +55,9 @@ func _on_body_entered(body: RigidBody2D) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("coins"):
 		coin_collected.emit(area.big_coin)
+	elif area.is_in_group("shields"):
+		special_item_collected.emit(area)
+		gain_shield_protection()
 	else:
 		special_item_collected.emit(area)
 	area.queue_free()
@@ -69,7 +74,6 @@ func become_invincible() -> void:
 	await get_tree().create_timer(invincibility_duration).timeout
 	
 	is_invincible = false
-	#$CollisionShape2D.set_deferred("disabled", false)
 	$CollisionShape2D.disabled = false
 	show()
 	
@@ -81,3 +85,26 @@ func flash(duration: float) -> void:
 		visible = !visible
 		show() if visible else hide()
 	show()
+	
+func gain_shield_protection():
+	$ProtectionBubble.show()  # Show the bubble
+	$ProtectionBubble/ProtectionBubbleTimer.start()
+	$ProtectionBubble/FlashTimer.start(shield_flash_delay)
+	is_invincible = true
+
+
+func _on_protection_bubble_timer_timeout() -> void:
+	$ProtectionBubble.hide()
+	is_invincible = false
+	$ProtectionBubble/FlashTimer.stop()
+
+
+func _on_flash_timer_timeout() -> void:
+	# Toggle visibility at intervals
+	$ProtectionBubble.visible = !$ProtectionBubble.visible
+	
+	# Continue flashing if coin is still alive
+	if $ProtectionBubble/ProtectionBubbleTimer.time_left > 0:
+		$ProtectionBubble/FlashTimer.start(flash_interval)
+	else:
+		$ProtectionBubble/FlashTimer.stop()
